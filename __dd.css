@@ -1,0 +1,19 @@
+body {
+    /* font-family: Verdana; */
+    /* min-height: 95%; */
+    border: 1px dotted;
+    border-color: lightgrey;
+}
+
+.whiteborder {
+    border-color: white;
+}
+
+.greyborder {
+    border: 5px dotted;
+    border-color: grey;
+}
+
+.lgreyborder {
+    border-color: lightblue;
+}

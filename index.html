@@ -1,5 +1,78 @@
-<h1>MMAF to Decouple the Variablity in the Practice Context</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<p><span style="font-size:16px">Dashboard for demo and testing Multiple-step Moving Average Filter (MMAF) to decouple variability under built ... </span></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMAF: Multiple-step Moving Average Filter</title>
+    <script src="http://prodgrd02/lib/jquery-latest.js"></script>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="http://prodgrd02/lib/d3/d3.min.js"></script>
+    <!-- <script src="https://syntagmatic.github.io/parallel-coordinates/examples/lib/d3.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="./__dd.css">
+</head>
 
-<p><strong><span style="font-size:16px"><span style="color:#2980b9">Targeting to be avaliable before the end of Sep/2023 ...</span></span></strong></p>
+<body>
+    <details style="background-color: #ddf">
+        <summary>About MMAF ... click here to fold or unfold this 'About' section</summary>
+        <h1>MMAF to Decouple the Variablity in the Practice Context</h1>
+        <p><span style="font-size:18px">This interactive dashboard is to demo and test the <strong>MMAF
+                </strong>algorithm
+                discussed in the CIGRE-660 paper &quot;Decoupling the variability using <strong>M</strong>ulti-step
+                <strong>M</strong>oving <strong>A</strong>verage <strong>F</strong>ilters&quot;, submitted to 2023 CIGRE
+                Canada
+                Conference (Vancouver, BC, Sept.25 &ndash; 28, 2023).</span></p>
+
+        <p><span style="font-size:18px">This dashboard takes the wind and solar generation time-sequence
+                (minute-by-minute )
+                data used in the paper as default data input.</span></p>
+
+        <p><span style="font-size:18px">Its input data can be switched to the load time-sequence data used in the paper
+                as input
+                by used the &#39;load.csv&#39; as the valve&nbsp; of &#39;csv&#39; URL parameter.&nbsp;</span></p>
+
+        <p><span style="font-size:18px"><a
+                    href="http://ad170163:5500/?csv=load.csv">http://ad170163:5500/<b>?csv=load.csv</b></a></span></p>
+
+        <p><span style="font-size:18px">Besides, this dashboard can take any time-sequence (with certain fixed time
+                interval)
+                data prepared in CSV format, here is the default CSV data file used in this dashboard.</span></p>
+
+        <p><span style="font-size:18px">To use the your own prepared CSV data in this dashboard, you just drag and drop
+                your
+                prepared CSV file with the time-sequencial data into the browser page. </span></p>
+
+        <p><span style="font-size:18px"><span style="color:#c0392b"><span style="background-color:#dddddd">Your data
+                        will be
+                        used ONLY inside your broswer, there is no code in the page to collect or send any of your data
+                        outside
+                        your broswer.</span></span></span></p>
+        <p><strong><span style="font-size:18px"><span style="color:#2980b9">Targeting to be avaliable before the end of
+                        Sep/2023 ...</span></span></strong></p>
+
+    </details>
+    <hr>
+    <!-- <details>
+        <summary>MMAF configuration</summary> -->
+    MMAF Period: <input type="text" id="mmaf_period" onchange="chart_mmafd()" size="15" value="1440,240,60,10"
+        placeholder="reducing periods for moving average, seperated by a ','">
+
+
+    <!-- </details> -->
+    <div id="chart_1"
+        style="resize:both; overflow: auto; display: inline-block; width:98%;margin-left:0px;height:400px;background:#ffe;">
+    </div>
+    <select id="seqChtOption" onchange="chart_seq()">
+        <option selected="selected">time sequency</option>
+    </select>
+    ... MMAF Adjust factor: <input type="text" id="mmaf_adjust" onchange="chart_seq()" size="25" value="1:1,1,1,1,1,2"
+        placeholder="weight-base:weight-0,weight-1, ... , weight-n">
+    <div id="chart_2"
+        style="resize:both; overflow: auto; display: inline-block; width:98%;margin-left:0px;height:350px;background:#fee;">
+    </div>
+
+</body>
+<script src="./__dd.js"></script>
+<script src="./mmaf.js"></script>
+
+</html>
