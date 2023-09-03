@@ -139,7 +139,7 @@ function chart_seq() {
         },
         active: 0,
         steps: [{
-            label: 'raw',
+            label: 'none',
             method: 'Plotly.update',
             args: ['y', traces.map((v, i) => v['y'])]
         }, {
@@ -235,7 +235,7 @@ function chart_mmafd() {
         },
         active: 0,
         steps: [{
-            label: 'raw',
+            label: 'none',
             method: 'Plotly.update',
             args: ['y', traces.map((v, i) => v['y'])]
         }, {
