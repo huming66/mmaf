@@ -40,6 +40,9 @@ function after_dropped() {
 document.addEventListener("reChart1", function (e) {
     chart_mmafd()
 });
+document.addEventListener("reChart2", function (e) {
+    chart_seq()
+});
 
 function mmafAnalysis() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')
@@ -51,6 +54,7 @@ function mmafAnalysis() {
     })
     spa.xLable = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
     document.dispatchEvent(new CustomEvent("reChart1", { "detail": 1 }))
+    document.dispatchEvent(new CustomEvent("reChart2", { "detail": 1 }))
 }
 function chart_seq() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')

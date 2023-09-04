@@ -26,8 +26,7 @@
                 (minute-by-minute )
                 data used in the paper as default data input.</span></p>
         <p><span style="font-size:18px">Its input data can be switched to the load time-sequence data used in the paper
-                as input
-                by used the &#39;load.csv&#39; as the valve&nbsp; of &#39;csv&#39; URL parameter.&nbsp;</span>
+                by used the &#39;load.csv&#39; as the valve&nbsp; of  &#39;csv&#39; URL parameter.&nbsp;</span>
             <span style="font-size:18px"><a
                     href="https://huming66.github.io/mmaf/?csv=load.csv">https://huming66.github.io/mmaf/<b>?csv=load.csv</b></a></span>
         </p>
@@ -35,8 +34,8 @@
                 interval)
                 data prepared in CSV format, <a href="https://huming66.github.io/mmaf/vGen.csv">here</a> 
             is the default CSV data file used in this dashboard.</span></p>
-        <p><span style="font-size:18px">To use the your own prepared CSV data in this dashboard, you just drag and drop
-                your prepared CSV file with the time-sequencial data into the browser page.</span> 
+        <p><span style="font-size:18px">To use your own prepared CSV data in this dashboard, you just drag and drop
+                your prepared CSV file (with the time-sequencial data) into the browser page.</span> 
         <span style="font-size:18px"><span style="color:#c0392b"><span style="background-color:#dddddd"> Your data (in your dropped CSV file) is
                         used ONLY inside your broswer, there is no code in the page to collect or send any of your data
                         outside your broswer.</span></span></span></p>
@@ -44,7 +43,7 @@
     <hr>
     <!-- <details>
         <summary>MMAF configuration</summary> -->
-    MMAF Period: <input type="text" id="mmaf_period" onchange="chart_mmafd()" size="15" value="1440,240,60,10"
+    MMAF Period: <input type="text" id="mmaf_period" onchange="mmafAnalysis()" size="15" value="1440,240,60,10"
         placeholder="reducing periods for moving average, seperated by a ','">
 
 
