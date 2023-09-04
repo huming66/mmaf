@@ -154,22 +154,50 @@ function chart_seq() {
             method: 'Plotly.update',
             args: ['y', traces.map((v, i) => v['y'].map(v1 => v1 / normalBase[i].mean))]
         }]
-    }]
-    pl_layout['updatemenus'] = [{                                           // 4.5.1.log-linear
-        pad: { t: -20, l: 5 },
-        type: 'buttons',
-        xanchor: 'left',
-        yanchor: 'top',
-        x: 0,
-        y: 0.9,
-        direction: 'right',
-        buttons: [{
-            label: 'Y: linear / log+',
+    },
+    {                                             // 4.5.* slider for Y axis
+        pad: { t: 2, right: 0},
+        len: 0.08,
+        xanchor: 'right',
+        x: 0.98,
+        y: 1,
+        bgcolor: "rgba(0,0,255,0.5)",
+        ticklen: 0,
+        currentvalue: {
+            xanchor: 'right',
+            prefix: 'Y-axis Scale: ',
+            font: {
+                color: 'blue',
+                size: 15
+            }
+        },
+        active: 0,
+        steps: [{
+            label: 'linear',
             method: 'relayout',
-            args2: ['yaxis.type', 'linear'],
+            args:  ['yaxis.type', 'linear']
+        }, {
+            label: 'log+',
+            method: 'relayout',
             args: ['yaxis.type', 'log']
         }]
-    }]
+    }
+]
+    // pl_layout['updatemenus'] = [{                                           // 4.5.1.log-linear
+    //     pad: { t: -20, l: 5 },
+    //     type: 'buttons',
+    //     xanchor: 'left',
+    //     yanchor: 'top',
+    //     x: 0,
+    //     y: 0.9,
+    //     direction: 'right',
+    //     buttons: [{
+    //         label: 'Y: linear / log+',
+    //         method: 'relayout',
+    //         args2: ['yaxis.type', 'linear'],
+    //         args: ['yaxis.type', 'log']
+    //     }]
+    // }]
     Plotly.newPlot('chart_2', traces, pl_layout, { scrollZoom: true })
 }
 function chart_mmafd() {
@@ -249,22 +277,50 @@ function chart_mmafd() {
             method: 'Plotly.update',
             args: ['y', traces.map((v, i) => v['y'].map(v1 => v1 / normalBase[i].mean))]
         }]
-    }]
-    pl_layout['updatemenus'] = [{                                           // 4.5.1.log-linear
-        pad: { t: -20, l: 5 },
-        type: 'buttons',
-        xanchor: 'left',
-        yanchor: 'top',
-        x: 0,
-        y: 0.9,
-        direction: 'right',
-        buttons: [{
-            label: 'Y: linear / log+',
+    },
+    {                                             // 4.5.* slider for Y axis
+        pad: { t: 2, left: 0},
+        len: 0.08,
+        xanchor: 'right',
+        x: 0.98,
+        y: 1,
+        bgcolor: "rgba(0,0,255,0.5)",
+        ticklen: 0,
+        currentvalue: {
+            xanchor: 'right',
+            prefix: 'Y-axis scale: ',
+            font: {
+                color: 'blue',
+                size: 15
+            }
+        },
+        active: 0,
+        steps: [{
+            label: 'linear',
             method: 'relayout',
-            args2: ['yaxis.type', 'linear'],
+            args:  ['yaxis.type', 'linear']
+        }, {
+            label: 'log+',
+            method: 'relayout',
             args: ['yaxis.type', 'log']
         }]
-    }]
+    }
+]
+    // pl_layout['updatemenus'] = [{                                           // 4.5.1.log-linear
+    //     pad: { t: -20, l: 5 },
+    //     type: 'buttons',
+    //     xanchor: 'left',
+    //     yanchor: 'top',
+    //     x: 0,
+    //     y: 0.9,
+    //     direction: 'right',
+    //     buttons: [{
+    //         label: 'Y: linear / log+',
+    //         method: 'relayout',
+    //         args2: ['yaxis.type', 'linear'],
+    //         args: ['yaxis.type', 'log']
+    //     }]
+    // }]
     Plotly.newPlot('chart_1', traces, pl_layout, { scrollZoom: true })
 }
 function cycleMW(yClc, cyclePt, mode = 0, returnAll = true, msg = true) {
