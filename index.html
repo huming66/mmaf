@@ -15,39 +15,31 @@
 <body>
     <details style="background-color: #ddf">
         <summary>About MMAF ... click here to fold or unfold this 'About' section</summary>
-        <h1>MMAF to Decouple the Variablity in the Practice Context</h1>
+        <h2>MMAF to Decouple the Variablity in the Practice Context</h2>
         <p><span style="font-size:18px">This interactive dashboard is to demo and test the <strong>MMAF
                 </strong>algorithm
                 discussed in the CIGRE-660 paper &quot;Decoupling the variability using <strong>M</strong>ulti-step
                 <strong>M</strong>oving <strong>A</strong>verage <strong>F</strong>ilters&quot;, submitted to 2023 CIGRE
                 Canada
                 Conference (Vancouver, BC, Sept.25 &ndash; 28, 2023).</span></p>
-
         <p><span style="font-size:18px">This dashboard takes the wind and solar generation time-sequence
                 (minute-by-minute )
                 data used in the paper as default data input.</span></p>
-
         <p><span style="font-size:18px">Its input data can be switched to the load time-sequence data used in the paper
                 as input
                 by used the &#39;load.csv&#39; as the valve&nbsp; of &#39;csv&#39; URL parameter.&nbsp;</span>
             <span style="font-size:18px"><a
                     href="https://huming66.github.io/mmaf/?csv=load.csv">https://huming66.github.io/mmaf/<b>?csv=load.csv</b></a></span>
         </p>
-
         <p><span style="font-size:18px">Besides, this dashboard can take any time-sequence (with certain fixed time
                 interval)
                 data prepared in CSV format, <a href="https://huming66.github.io/mmaf/vGen.csv">here</a> 
             is the default CSV data file used in this dashboard.</span></p>
-
         <p><span style="font-size:18px">To use the your own prepared CSV data in this dashboard, you just drag and drop
-                your prepared CSV file with the time-sequencial data into the browser page.
-        
-        </span> 
+                your prepared CSV file with the time-sequencial data into the browser page.</span> 
         <span style="font-size:18px"><span style="color:#c0392b"><span style="background-color:#dddddd"> Your data (in your dropped CSV file) is
                         used ONLY inside your broswer, there is no code in the page to collect or send any of your data
                         outside your broswer.</span></span></span></p>
-
-        <p></p>
     </details>
     <hr>
     <!-- <details>
@@ -63,8 +55,9 @@
     <select id="seqChtOption" onchange="chart_seq()">
         <option selected="selected">time sequency</option>
     </select>
-    ... MMAF Adjust factor: <input type="text" id="mmaf_adjust" onchange="chart_seq()" size="15" value="1:1,1,1,1,1,2"
+    ... MMAF Adjust Factors: <input type="text" id="mmaf_adjust" onchange="chart_seq()" size="15" value="1:1,1,1,1,1,2"
         placeholder="weight-base:weight-0,weight-1, ... , weight-n">
+        <button id='saveCSV' onclick="saveCSV()" title="select time-series data to export">export data in following chart</button>
     <div id="chart_2"
         style="resize:both; overflow: auto; display: inline-block; width:98%;margin-left:0px;height:350px;background:#fee;">
     </div>
