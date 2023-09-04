@@ -1,3 +1,5 @@
 # MMAF to Decouple the Variablity in the Practice Context
-dashboard for demo and testing Multiple-step Moving Average Filter (MMAF) to decouple variability 
-under built ... targeting to be avaliable before the end of Sep/2023
+This is an interactive dashboard for demo and testing Multiple-step Moving Average Filter (MMAF) to decouple variability.
+It accepts any data in CSV format (droping in a CSV file in the dashboard page). 
+
+Try and play at https://huming66.github.io/mmaf
