@@ -208,8 +208,6 @@ function chart_seq() {
 }
 function chart_mmafd() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')
-    var mmap_a = document.getElementById('mmaf_adjust').value.split(':')
-    mmap_a[1] = mmap_a[1].split(',')
     var traces = []
     var normalBase = []
     spa.cycData.forEach((v, i) => {
