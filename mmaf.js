@@ -59,7 +59,7 @@ function mmafAnalysis() {
 function chart_seq() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')
     var mmap_a = document.getElementById('mmaf_adjust').value.split(':')
-    if mmap_a.length == 2 {
+    if (mmap_a.length == 2) {
         mmap_a[1] = mmap_a[1].split(',')
     } else {
         mmap_a[1] = mmap_a[0].split(',')
