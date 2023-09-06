@@ -59,7 +59,12 @@ function mmafAnalysis() {
 function chart_seq() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')
     var mmap_a = document.getElementById('mmaf_adjust').value.split(':')
-    mmap_a[1] = mmap_a[1].split(',')
+    if mmap_a.length == 2 {
+        mmap_a[1] = mmap_a[1].split(',')
+    } else {
+        mmap_a[1] = mmap_a[0].split(',')
+        mmap_a[0] = 1
+    }
     var seqOption = document.getElementById('seqChtOption').value
     if (seqOption == 'time sequency') {
         var seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
