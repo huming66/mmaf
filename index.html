@@ -45,7 +45,7 @@
     <!-- <details>
         <summary>MMAF configuration</summary> -->
     MMAF Period: <input type="text" id="mmaf_period" onchange="mmafAnalysis()" size="15" style="background-color:lightgreen" value="1440,240,60,10"
-        placeholder="reducing periods for moving average, seperated by a comma"> ... for the example data, the data is in 1-minute resulution, 1440, 240, 60 and 10 are representing 4 redusing periods of 1-day, 4-hour, 1-hour and 10-minute 
+        placeholder="reducing periods for moving average, seperated by a comma"> ... for the example data, the data is in 1-minute resulution, [1440,240,60,10] are representing 4 redusing periods of 1-day, 4-hour, 1-hour and 10-minute 
 
 
     <!-- </details> -->
@@ -58,7 +58,7 @@
     ... MMAF Adjust Factors: <input type="text" id="mmaf_adjust" onchange="chart_seq()" size="15"  style="background-color:lightgreen" value="1,1,1,1,1,5"
         placeholder="weight-base:weight-0,weight-1, ... , weight-n">
         <button id='saveCSV' onclick="saveCSV()" title="select time-series data to export">export data in following chart</button> ...
-        in the default adjust factors' configuration, the last component is amplified 5 times for demo its impact
+        in the default adjust factors' configuration of [1,1,1,1,1,5], the last component (for variance between 10-minute and 1-minute) is amplified 5 times for demo its impact
     <div id="chart_2"
         style="resize:both; overflow: auto; display: inline-block; width:98%;margin-left:0px;height:400px;background:#fee;">
     </div>
