@@ -66,7 +66,7 @@ function chart_seq() {
         mmap_a[0] = 1
     }
     var seqOption = document.getElementById('seqChtOption').value
-    if (seqOption == 'time sequency') {
+    if (seqOption == 'Oringinal time sequency data') {
         var seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
     } else {
         var dcplItem = seqOption.replace(' ... decouple & adjust', '')
