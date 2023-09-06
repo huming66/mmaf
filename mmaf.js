@@ -106,7 +106,7 @@ function chart_seq() {
         })
     })
     var pl_layout = {                                                          // layout (1)      
-        title: 'Decoupled components by MMAF in time-series',
+        title: 'Oringinal Data and Its Decoupled components by MMAF in Time-series',
         legend: {
             traceorder: 'normal',
             orientation: "v",
