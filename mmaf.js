@@ -101,6 +101,7 @@ function chart_seq() {
         })
     })
     var pl_layout = {                                                          // layout (1)      
+        title: 'Decoupled components by MMAF in time-series',
         legend: {
             traceorder: 'normal',
             orientation: "v",
@@ -224,6 +225,7 @@ function chart_mmafd() {
         })
     })
     var pl_layout = {                                                          // layout (1)      
+        title: 'The Magnitude of Decoupled components by MMAF',
         legend: {
             traceorder: 'normal',
             orientation: "v",
