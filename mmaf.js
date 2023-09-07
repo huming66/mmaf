@@ -135,7 +135,7 @@ function chart_seq() {
         len: 0.1,
         xanchor: 'left',
         x: 1,
-        y: 1.05,
+        y: 1,
         bgcolor: "rgba(0,0,255,0.5)",
         ticklen: 0,
         currentvalue: {
