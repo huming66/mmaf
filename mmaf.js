@@ -131,7 +131,7 @@ function chart_seq() {
         yaxis: { type: 'linear', gridcolor: '#aaaaaa', gridwidth: 0.5, showspikes: true, spikemode: 'toaxis' },
     }
     pl_layout['sliders'] = [{                                             // 4.5.* slider for Y axis
-        pad: { t: 2, right: 10 },
+        pad: { t: -25, right: 10 },
         len: 0.1,
         xanchor: 'left',
         x: 1,
@@ -162,10 +162,10 @@ function chart_seq() {
         }]
     },
     {                                             // 4.5.* slider for Y axis
-        pad: { t: 2, right: 0},
-        len: 0.08,
-        xanchor: 'right',
-        x: 0.98,
+        pad: { t: -25, right: 0},
+        len: 0.06,
+        xanchor: 'left',
+        x: 0.01,
         y: 1,
         bgcolor: "rgba(0,0,255,0.5)",
         ticklen: 0,
@@ -253,7 +253,7 @@ function chart_mmafd() {
         yaxis: { type: 'linear', gridcolor: '#aaaaaa', gridwidth: 0.5, showspikes: true, spikemode: 'toaxis' },
     }
     pl_layout['sliders'] = [{                                             // 4.5.* slider for Y axis
-        pad: { t: 2, right: 10 },
+        pad: { t: -25, right: 10 },
         len: 0.1,
         xanchor: 'left',
         x: 1,
@@ -284,10 +284,10 @@ function chart_mmafd() {
         }]
     },
     {                                             // 4.5.* slider for Y axis
-        pad: { t: 2, left: 0},
-        len: 0.08,
-        xanchor: 'right',
-        x: 0.98,
+        pad: { t: -25, left: 0},
+        len: 0.06,
+        xanchor: 'left',
+        x: 0.01,
         y: 1,
         bgcolor: "rgba(0,0,255,0.5)",
         ticklen: 0,
