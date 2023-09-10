@@ -120,7 +120,7 @@ function chart_seq() {
             // borderwidth: 2
         },
         autosize: true,
-        margin: { l: 100, r: 100, b: 10, t: 30, pad: 1 },
+        margin: { l: 60, r: 100, b: 10, t: 30, pad: 1 },
         paper_bgcolor: '#ffffff', plot_bgcolor: '#ffffee',
         xaxis_showgrid: true, yaxis_showgrid: true,
         dragmode: 'select',
@@ -242,7 +242,7 @@ function chart_mmafd() {
             // borderwidth: 2
         },
         autosize: true,
-        margin: { l: 100, r: 100, b: 10, t: 30, pad: 1 },
+        margin: { l: 60, r: 100, b: 10, t: 30, pad: 1 },
         paper_bgcolor: '#ffffff', plot_bgcolor: '#ffffee',
         xaxis_showgrid: true, yaxis_showgrid: true,
         dragmode: 'select',
