@@ -24,16 +24,6 @@ window.onload = function () {
 function after_dropped() {
     spa.seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
     mmafAnalysis()
-    var elm = document.getElementById('seqChtOption')
-    const firstOption = elm.querySelector("option:first-child");
-    while (elm.options.length > 1) {
-        elm.removeChild(elm.options[1]);
-    }
-    Object.keys(spa.data[0]).forEach(opt => {
-        var option = document.createElement("option")
-        option.text = opt + ' ... decouple & adjust'
-        elm.add(option)
-    })
     chart_seq()
 }
 
@@ -59,6 +49,22 @@ function mmafAnalysis() {
 function chart_seq() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')
     var mmap_a = document.getElementById('mmaf_adjust').value.split(':')
+    var elm = document.getElementById('seqChtOption')
+    const firstOption = elm.querySelector("option:first-child");
+    while (elm.options.length > 1) {
+        elm.removeChild(elm.options[1]);
+    }
+    Object.keys(spa.data[0]).forEach(opt => {
+        var option = document.createElement("option")
+        option.text = opt + ' ... decouple & adjust'
+        elm.add(option)
+    }) 
+    var _mmaf_p = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
+    _mmaf_p.forEach(opt => {
+        var option = document.createElement("option")
+        option.text = opt 
+        elm.add(option)
+    })
     if (mmap_a.length == 2) {
         mmap_a[1] = mmap_a[1].split(',')
     } else {
@@ -68,7 +74,7 @@ function chart_seq() {
     var seqOption = document.getElementById('seqChtOption').value
     if (seqOption == 'Oringinal time sequency data') {
         var seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
-    } else {
+    } else if (seqOption.includes(' ... decouple & adjust')) {
         var dcplItem = seqOption.replace(' ... decouple & adjust', '')
         var seqData = [[dcplItem, ...spa.data.map(v1 => v1[dcplItem])]]
         var cmps = Array(spa.data.length).fill(0)
@@ -81,6 +87,9 @@ function chart_seq() {
         })
         seqData.push(['adjusted', ...cmps])
         seqData.push(['difference', ...rsdl])
+    } else {  // for certain band
+        var _idx = spa.xLable.indexOf(seqOption)
+        var seqData = spa.cycData.map(v => [v.name, ...v.data.yVar[_idx]])
     }
     var traces = []
     var normalBase = []
