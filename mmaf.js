@@ -88,6 +88,9 @@ function chart_seq() {
         })
         seqData.push(['adjusted', ...cmps])
         seqData.push(['difference', ...rsdl])
+    } else {  // for certain band
+        var _idx = spa.xLable.indexOf(seqOption)
+        var seqData = spa.cycData.map(v => [v.name, ...v.data.yVar[_idx]])
     }
     var traces = []
     var normalBase = []
