@@ -34,6 +34,13 @@ function after_dropped() {
         option.text = opt + ' ... decouple & adjust'
         elm.add(option)
     })
+    var mmaf_p = document.getElementById('mmaf_period').value.split(',') 
+    mmaf_p = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
+    mmaf_p.forEach(opt => {
+        var option = document.createElement("option")
+        option.text = opt 
+        elm.add(option)
+    })
     chart_seq()
 }
 
@@ -68,7 +75,7 @@ function chart_seq() {
     var seqOption = document.getElementById('seqChtOption').value
     if (seqOption == 'Oringinal time sequency data') {
         var seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
-    } else {
+    } else if (seqOption.includes(' ... decouple & adjust')) {
         var dcplItem = seqOption.replace(' ... decouple & adjust', '')
         var seqData = [[dcplItem, ...spa.data.map(v1 => v1[dcplItem])]]
         var cmps = Array(spa.data.length).fill(0)
