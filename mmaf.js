@@ -23,8 +23,28 @@ window.onload = function () {
 };
 function after_dropped() {
     spa.seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
-    mmafAnalysis()
+    mmafAnalysis()  
     chart_seq()
+}
+function changeDropdown() {
+    var elm = document.getElementById('seqChtOption')
+    const firstOption = elm.querySelector("option:first-child");
+    while (elm.options.length > 1) {
+        elm.removeChild(elm.options[1]);
+    }
+    Object.keys(spa.data[0]).forEach(opt => {
+        var option = document.createElement("option")
+        option.text = opt + ' ... decouple & adjust'
+        elm.add(option)
+    }) 
+    var mmaf_p = document.getElementById('mmaf_period').value.split(',')
+    spa.xLable = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
+    var _mmaf_p = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
+    _mmaf_p.forEach(opt => {
+        var option = document.createElement("option")
+        option.text = opt 
+        elm.add(option)
+    }) 
 }
 
 document.addEventListener("reChart1", function (e) {
@@ -43,28 +63,12 @@ function mmafAnalysis() {
         }
     })
     spa.xLable = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
+    changeDropdown()
     document.dispatchEvent(new CustomEvent("reChart1", { "detail": 1 }))
     document.dispatchEvent(new CustomEvent("reChart2", { "detail": 1 }))
 }
 function chart_seq() {
-    var mmaf_p = document.getElementById('mmaf_period').value.split(',')
     var mmap_a = document.getElementById('mmaf_adjust').value.split(':')
-    var elm = document.getElementById('seqChtOption')
-    const firstOption = elm.querySelector("option:first-child");
-    while (elm.options.length > 1) {
-        elm.removeChild(elm.options[1]);
-    }
-    Object.keys(spa.data[0]).forEach(opt => {
-        var option = document.createElement("option")
-        option.text = opt + ' ... decouple & adjust'
-        elm.add(option)
-    }) 
-    var _mmaf_p = ['avg', ...mmaf_p.map((v, i) => (i > 0 ? mmaf_p[i - 1] : '') + '...' + v), mmaf_p.slice(-1)[0] + '...1']
-    _mmaf_p.forEach(opt => {
-        var option = document.createElement("option")
-        option.text = opt 
-        elm.add(option)
-    })
     if (mmap_a.length == 2) {
         mmap_a[1] = mmap_a[1].split(',')
     } else {
@@ -400,10 +404,7 @@ function saveCSV(cht = "chart_2", fmt = "%Y-%m-%d %H:%M") {
     var blob = new Blob([d3.csv.format(data_csv)], { type: "text/csv;charset=utf-8" });
     saveAs(blob, 'data_' + d3.time.format("%Y%m%d%H%M%S")(new Date()) + '.csv');
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> b366a8fda09103fc7b5e56f7133985b9f8b17612
 function aetMMAFP() {
     document.getElementById('mmaf_period').value = '1440,240,10'
     mmafAnalysis()
