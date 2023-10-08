@@ -391,7 +391,10 @@ function saveCSV(cht = "chart_2", fmt = "%Y-%m-%d %H:%M") {
     var blob = new Blob([d3.csv.format(data_csv)], { type: "text/csv;charset=utf-8" });
     saveAs(blob, 'data_' + d3.time.format("%Y%m%d%H%M%S")(new Date()) + '.csv');
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b366a8fda09103fc7b5e56f7133985b9f8b17612
 function aetMMAFP() {
     document.getElementById('mmaf_period').value = '1440,240,10'
     mmafAnalysis()
