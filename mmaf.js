@@ -318,7 +318,7 @@ function chart_mmafd() {
             method: 'relayout',
             args:  ['yaxis.type', 'linear']
         }, {
-            label: 'log+',
+            label: 'log',
             method: 'relayout',
             args: ['yaxis.type', 'log']
         }]
