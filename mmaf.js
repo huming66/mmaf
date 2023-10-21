@@ -222,123 +222,266 @@ function chart_seq() {
 function chart_mmafd() {
     var mmaf_p = document.getElementById('mmaf_period').value.split(',')
     var traces = []
-    var normalBase = []
-    spa.cycData.forEach((v, i) => {
-        var trace1 = {
-            type: 'bar',
-            opacity: 0.75,
-            y: v.data.yVAR,
-            name: v.name,
-            x: spa.xLable,
-            yaxis: 'y',
-            showlegend: true,
-        };
-        traces.push(trace1)
-        normalBase.push({
-            value: 1,
-            max: d3.max(spa.seqData[i].slice(1).map(v => Math.abs(v))),
-            mean: d3.mean(spa.seqData[i].slice(1).map(v => Math.abs(v)))
+    var normalBase
+    let chtType = document.getElementById('ChtType').value
+    if (chtType == 'mmafd') {
+        normalBase = []
+        spa.cycData.forEach((v, i) => {
+            var trace1 = {
+                type: 'bar',
+                opacity: 0.75,
+                y: v.data.yVAR,
+                name: v.name,
+                x: spa.xLable,
+                yaxis: 'y',
+                showlegend: true,
+            };
+            traces.push(trace1)
+            normalBase.push({
+                value: 1,
+                max: d3.max(spa.seqData[i].slice(1).map(v => Math.abs(v))),
+                mean: d3.mean(spa.seqData[i].slice(1).map(v => Math.abs(v)))
+            })
         })
-    })
-    var pl_layout = {                                                          // layout (1)      
-        title: 'The Magnitude of Decoupled components by MMAF',
-        legend: {
-            traceorder: 'normal',
-            orientation: "v",
-            font: {
-                size: 12, //   family: 'sans-serif', //   color: '#000'
+        var pl_layout = {                                                          // layout (1)      
+            title: 'The Magnitude of Decoupled components by MMAF',
+            legend: {
+                traceorder: 'normal',
+                orientation: "v",
+                font: {
+                    size: 12, //   family: 'sans-serif', //   color: '#000'
+                },
+                x: 1,
+                y: 0.4
+                // bgcolor: '#E2E2E2',
+                // bordercolor: '#FFFFFF',
+                // borderwidth: 2
             },
+            autosize: true,
+            margin: { l: 60, r: 100, b: 10, t: 30, pad: 1 },
+            paper_bgcolor: '#ffffff', plot_bgcolor: '#ffffee',
+            xaxis_showgrid: true, yaxis_showgrid: true,
+            dragmode: 'select',
+            xaxis: {
+                type: 'category', gridcolor: '#aaaaaa', gridwidth: 0.1,  //"rgb(209, 197, 232)"}
+                automargin: true, title: { standoff: 30 }, showspikes: true, spikemode: 'across'
+            },
+            yaxis: { type: 'linear', gridcolor: '#aaaaaa', gridwidth: 0.5, showspikes: true, spikemode: 'toaxis' },
+        }
+        pl_layout['sliders'] = [{                                             // 4.5.* slider for Y axis
+            pad: { t: -25, right: 10 },
+            len: 0.1,
+            xanchor: 'left',
             x: 1,
-            y: 0.4
-            // bgcolor: '#E2E2E2',
-            // bordercolor: '#FFFFFF',
-            // borderwidth: 2
+            y: 1,
+            bgcolor: "rgba(0,0,255,0.5)",
+            ticklen: 0,
+            currentvalue: {
+                xanchor: 'right',
+                prefix: 'Normalize on: ',
+                font: {
+                    color: 'blue',
+                    size: 15
+                }
+            },
+            active: 0,
+            steps: [{
+                label: 'none',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'])]
+            }, {
+                label: 'max||',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'].map(v1 => v1 / normalBase[i].max))]
+            }, {
+                label: 'avg||',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'].map(v1 => v1 / normalBase[i].mean))]
+            }]
         },
-        autosize: true,
-        margin: { l: 60, r: 100, b: 10, t: 30, pad: 1 },
-        paper_bgcolor: '#ffffff', plot_bgcolor: '#ffffee',
-        xaxis_showgrid: true, yaxis_showgrid: true,
-        dragmode: 'select',
-        xaxis: {
-            type: 'category', gridcolor: '#aaaaaa', gridwidth: 0.1,  //"rgb(209, 197, 232)"}
-            automargin: true, title: { standoff: 30 }, showspikes: true, spikemode: 'across'
-        },
-        yaxis: { type: 'linear', gridcolor: '#aaaaaa', gridwidth: 0.5, showspikes: true, spikemode: 'toaxis' },
+        {                                             // 4.5.* slider for Y axis
+            pad: { t: -25, left: 0 },
+            len: 0.06,
+            xanchor: 'left',
+            x: 0.01,
+            y: 1,
+            bgcolor: "rgba(0,0,255,0.5)",
+            ticklen: 0,
+            currentvalue: {
+                xanchor: 'right',
+                prefix: 'Y-axis scale: ',
+                font: {
+                    color: 'blue',
+                    size: 15
+                }
+            },
+            active: 0,
+            steps: [{
+                label: 'linear',
+                method: 'relayout',
+                args: ['yaxis.type', 'linear']
+            }, {
+                label: 'log',
+                method: 'relayout',
+                args: ['yaxis.type', 'log']
+            }]
+        }
+        ]
+        // pl_layout['updatemenus'] = [{                                           // 4.5.1.log-linear
+        //     pad: { t: -20, l: 5 },
+        //     type: 'buttons',
+        //     xanchor: 'left',
+        //     yanchor: 'top',
+        //     x: 0,
+        //     y: 0.9,
+        //     direction: 'right',
+        //     buttons: [{
+        //         label: 'Y: linear / log+',
+        //         method: 'relayout',
+        //         args2: ['yaxis.type', 'linear'],
+        //         args: ['yaxis.type', 'log']
+        //     }]
+        // }]
+    } else if (chtType == 'box') {
+        normalBase = []
+        spa.cycData.forEach((v, i) => {
+            var x = [], nX = v.data.yVar[0].length
+            spa.xLable.forEach(grp => {
+                x = [...x, ...[...Array(nX)].map((u) => grp)]
+            })
+            var y = []
+            normalBase0 = {yMax:[], yAvg:[]}
+            v.data.yVar.forEach(yVar => {
+                y = [...y, ...yVar];
+                var yMax = d3.max(spa.seqData[i].slice(1).map(v => Math.abs(v)))
+                var yAvg = d3.mean(spa.seqData[i].slice(1).map(v => Math.abs(v)))
+                normalBase0.yMax = [...normalBase0.yMax , ...yVar.map(() => yMax)];
+                normalBase0.yAvg = [...normalBase0.yAvg , ...yVar.map(() => yAvg)];
+            })
+            var trace1 = {
+                y: y,
+                x: x,         
+                type: 'box',
+                name: v.name,
+                opacity: 0.75,
+                showlegend: true,
+                // jitter: 0.3,
+                // boxpoints: 'all',                
+            };
+            traces.push(trace1)
+            normalBase.push({
+                value: 1,
+                max: d3.max(spa.seqData[i].slice(1).map(v => Math.abs(v))),
+                mean: d3.mean(spa.seqData[i].slice(1).map(v => Math.abs(v)))
+            })
+        })
+        var pl_layout = {
+            yaxis: {
+              title: 'box chart',
+              zeroline: false
+            },
+            boxmode: 'group'
+          };
+        pl_layout['sliders'] = [{                                             // 4.5.* slider for Y axis
+            pad: { t: -80, right: 10 },
+            len: 0.1,
+            xanchor: 'left',
+            x: 1,
+            y: 1,
+            bgcolor: "rgba(0,0,255,0.5)",
+            ticklen: 0,
+            currentvalue: {
+                xanchor: 'right',
+                prefix: 'Normalize on: ',
+                font: {
+                    color: 'blue',
+                    size: 15
+                }
+            },
+            active: 0,
+            steps: [{
+                label: 'none',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'])]
+            }, {
+                label: 'max||',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'].map((v1) => v1 / normalBase[i].max))]
+            }, {
+                label: 'avg||',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'].map((v1) => v1 / normalBase[i].mean))]
+            }]
+        }]          
+    } else if (chtType == 'violin') {
+        normalBase = []
+        spa.xLable.forEach((prd,i) => {
+            spa.cycData.forEach((item,j) => {
+                var trace1 = {
+                    y: item.data.yVar[i],
+                    // x: spa.xLable[j] + spa.cycData[1].name,         
+                    type: 'violin',
+                    name: prd + ' ' + item.name,
+                    legendgroup: prd,
+                    // scalegroup: prd,
+                    opacity: 0.75,
+                    // showlegend: true,
+                    // scalemode:'width',
+                    box: {
+                        visible: true
+                      },
+                    width: 0.8,
+                    // side: 'positive'
+                    // jitter: 0.3,
+                    // boxpoints: 'all',                
+                };
+                traces.push(trace1)
+                normalBase.push({
+                    value: 1,
+                    max: d3.max(spa.seqData[j].slice(1).map(v => Math.abs(v))),
+                    mean: d3.mean(spa.seqData[j].slice(1).map(v => Math.abs(v)))
+                })
+            })
+        })
+        var pl_layout = {
+            yaxis: {
+              title: 'Violin chart',
+              zeroline: true,
+            },
+            // violinmode: 'group',
+          };
+        pl_layout['sliders'] = [{                                             // 4.5.* slider for Y axis
+            pad: { t: -80, right: 10 },
+            len: 0.1,
+            xanchor: 'left',
+            x: 1,
+            y: 1,
+            bgcolor: "rgba(0,0,255,0.5)",
+            ticklen: 0,
+            currentvalue: {
+                xanchor: 'right',
+                prefix: 'Normalize on: ',
+                font: {
+                    color: 'blue',
+                    size: 15
+                }
+            },
+            active: 0,
+            steps: [{
+                label: 'none',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'])]
+            }, {
+                label: 'max||',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'].map((v1) => v1 / normalBase[i].max))]
+            }, {
+                label: 'avg||',
+                method: 'Plotly.update',
+                args: ['y', traces.map((v, i) => v['y'].map((v1) => v1 / normalBase[i].mean))]
+            }]
+        }]          
     }
-    pl_layout['sliders'] = [{                                             // 4.5.* slider for Y axis
-        pad: { t: -25, right: 10 },
-        len: 0.1,
-        xanchor: 'left',
-        x: 1,
-        y: 1,
-        bgcolor: "rgba(0,0,255,0.5)",
-        ticklen: 0,
-        currentvalue: {
-            xanchor: 'right',
-            prefix: 'Normalize on: ',
-            font: {
-                color: 'blue',
-                size: 15
-            }
-        },
-        active: 0,
-        steps: [{
-            label: 'none',
-            method: 'Plotly.update',
-            args: ['y', traces.map((v, i) => v['y'])]
-        }, {
-            label: 'max||',
-            method: 'Plotly.update',
-            args: ['y', traces.map((v, i) => v['y'].map(v1 => v1 / normalBase[i].max))]
-        }, {
-            label: 'avg||',
-            method: 'Plotly.update',
-            args: ['y', traces.map((v, i) => v['y'].map(v1 => v1 / normalBase[i].mean))]
-        }]
-    },
-    {                                             // 4.5.* slider for Y axis
-        pad: { t: -25, left: 0},
-        len: 0.06,
-        xanchor: 'left',
-        x: 0.01,
-        y: 1,
-        bgcolor: "rgba(0,0,255,0.5)",
-        ticklen: 0,
-        currentvalue: {
-            xanchor: 'right',
-            prefix: 'Y-axis scale: ',
-            font: {
-                color: 'blue',
-                size: 15
-            }
-        },
-        active: 0,
-        steps: [{
-            label: 'linear',
-            method: 'relayout',
-            args:  ['yaxis.type', 'linear']
-        }, {
-            label: 'log',
-            method: 'relayout',
-            args: ['yaxis.type', 'log']
-        }]
-    }
-]
-    // pl_layout['updatemenus'] = [{                                           // 4.5.1.log-linear
-    //     pad: { t: -20, l: 5 },
-    //     type: 'buttons',
-    //     xanchor: 'left',
-    //     yanchor: 'top',
-    //     x: 0,
-    //     y: 0.9,
-    //     direction: 'right',
-    //     buttons: [{
-    //         label: 'Y: linear / log+',
-    //         method: 'relayout',
-    //         args2: ['yaxis.type', 'linear'],
-    //         args: ['yaxis.type', 'log']
-    //     }]
-    // }]
     Plotly.newPlot('chart_1', traces, pl_layout, { scrollZoom: true })
 }
 function cycleMW(yClc, cyclePt, mode = 0, returnAll = true, msg = true) {
