@@ -15,12 +15,21 @@ window.onload = function () {
                 if (i > 0) { dataCSV[i] = renameKeys(dataCSV[0], dataCSV[i]) };
             })
             spa.data = dataCSV.slice(1, Object.keys(dataCSV.slice(-1)[0]).length < Object.keys(dataCSV[0]).length ? -1 : undefined)
+            let mmaf_period = getUrlVars('ws')
+            if (mmaf_period) document.getElementById('mmaf_period').value = mmaf_period
             after_dropped()
         })
         .catch(error => {
             console.error("Error reading file:", error);
         });
 };
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
 function after_dropped() {
     spa.seqData = Object.keys(spa.data[0]).map(v => [v, ...spa.data.map(v1 => v1[v])])
     mmafAnalysis()  
