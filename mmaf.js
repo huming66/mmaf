@@ -15,7 +15,7 @@ window.onload = function () {
                 if (i > 0) { dataCSV[i] = renameKeys(dataCSV[0], dataCSV[i]) };
             })
             spa.data = dataCSV.slice(1, Object.keys(dataCSV.slice(-1)[0]).length < Object.keys(dataCSV[0]).length ? -1 : undefined)
-            let mmaf_period = getUrlVars()('ws')
+            let mmaf_period = getUrlVars()['ws']
             if (mmaf_period) document.getElementById('mmaf_period').value = mmaf_period
             after_dropped()
         })
